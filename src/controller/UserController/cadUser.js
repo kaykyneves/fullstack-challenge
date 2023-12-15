@@ -19,6 +19,7 @@ const createUser = async (request, response) => {
     }
 
     // Checking if the email already exists in the database
+    /*
     const verifyEmail = await prisma.user.findUnique({
       where: {
         email: email,
@@ -29,7 +30,7 @@ const createUser = async (request, response) => {
     if (verifyEmail) {
       return response.status(401).json("Email already registered");
     }
-
+    */
     // Using bcrypt to hash the password
     const passCript = await criptoPassword(password);
 
@@ -50,7 +51,7 @@ const createUser = async (request, response) => {
     });
 
     // Returning the user data
-    return response.json(user);
+    return response.status(201).json(user);
   } catch (error) {
     console.error("Error creating user:", error);
     return response.status(500).json({ error: "Internal Server Error" });
